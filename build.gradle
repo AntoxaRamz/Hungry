@@ -40,6 +40,7 @@ dependencies {
     compile 'com.googlecode.json-simple:json-simple:1.1.1'
     compile 'org.bukkit:bukkit:1.8.6-R0.1-SNAPSHOT'
 	provided 'ru.ensemplix.command:Monsoon:1.1'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
 }
 
 jar {

@@ -2,6 +2,7 @@
 .gradle
 build
 out
+libs
 *.iml
 *.ipr
 *.iws
