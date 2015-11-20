@@ -1,0 +1,53 @@
+apply plugin: 'checkstyle'
+apply plugin: 'java'
+apply plugin: 'idea'
+
+group = 'ru.ensemplix.hungry'
+version = '1.0-SNAPSHOT'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+checkstyle {
+    toolVersion = '6.3'
+    configFile = file('checkstyle.xml')
+}
+
+repositories {
+    mavenCentral()
+
+    maven {
+        url 'http://repo.bukkit.org/content/groups/public/'
+    }
+
+    maven {
+        url 'http://repo.mikeprimm.com/'
+    }
+	
+	maven {
+        url 'http://maven.ensemplix.ru/artifactory/Ensemplix/'
+    }
+}
+
+configurations {
+    provided
+    compile.extendsFrom provided
+}
+
+dependencies {
+    compile 'com.googlecode.json-simple:json-simple:1.1.1'
+    compile 'org.bukkit:bukkit:1.8.6-R0.1-SNAPSHOT'
+	provided 'ru.ensemplix.command:Monsoon:1.1'
+}
+
+jar {
+    baseName = 'hungry'
+
+    from {
+        configurations.provided.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+}
